@@ -1,0 +1,40 @@
+{% for include in page.includes %}
+{% if include == "vendors" %}
+
+<h4 class="center-align">Thanks to our&ensp;{{ page.year }}&ensp;vendors</h4>
+
+{% assign grouped = site.data.[page.rendezvous_file].Vendors | group_by: "category" | sort: "name" %}
+
+  {% for group in grouped %}
+  {% for item in group.items %}
+  <article class='col s10 m4 offset-s1 center'>
+    <div class='card small hoverable waves-effect waves-dark'>
+      <a href="{{ item.website }}">
+        <div class="card-image valign-wrapper blue" style="height:66%">
+          <div class="card-gradient-bottom"></div>
+          
+          {% if item.photo_path != null %}
+          <img src="{{ item.photo_path | prepend: site.vendor_path | prepend: site.baseurl }}" alt="{{ item.photo_path }}" class="circle" />
+          
+          {% else %}
+          <i class="container large material-icons grey-text text-lighten-2">person</i>
+          
+          {% endif %}
+          <i class="small material-icons white-text tooltipped" data-position="left" data-tooltip="Visit {{ item.website }}" style="position:absolute; right:0;">launch</i>
+          <span class="card-title truncate">{{ item.name }}</span>
+        </div>
+        <div class="card-content grey-text text-darken-4">
+          <p class="light" align="justify"><b>{{ item.represenative }}</b><br />
+            <span>{{ item.contact-email }}</span>
+          </p>
+        </div>
+      </a>
+    </div>
+  </article>
+
+  {% endfor %}
+  {% endfor %}
+<!-- END list-rendezvous_vendors include -->
+
+{% endif %}
+{% endfor %}

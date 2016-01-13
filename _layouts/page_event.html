@@ -1,0 +1,144 @@
+---
+layout: default
+---
+{% include header.html %}
+
+<main class="content" role="main">
+  <div class="row">
+    
+    <section class="col s12 m6 offset-m1">
+      <article class="section" align="justify">
+
+        {% for rendezvous in site.data.Page_Data_-_Rendezvous %}
+        {% if rendezvous.year == page.year %}
+        <ul class="collection with-header">
+          <li class="collection-header">
+            <h5>{{ page.title }}</h5>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle">event</i>
+            <span class="title"><b>{{ rendezvous.date }}, {{ rendezvous.year }}</b></span>
+            <p><i>{{ rendezvous.theme }}</i></p>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle">place</i>
+            <span class="title"><b>{{ rendezvous.location }}</b></span>
+            <p>{{ rendezvous.address }}<br />{{ rendezvous.city-state-zipcode }}</p>
+            <p>{{ rendezvous.phone }}</p>
+            <a href="{{ rendezvous.website }}">{{ rendezvous.website }}</a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle">hotel</i>
+            <span class="title"><b>Reservations</b></span>
+            <p>{{ rendezvous.reservations }}</p>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle">loyalty</i>
+            <span class="title"><b>Registration</b></span>
+            <p>Early Bird Ends {{ rendezvous.early-bird-close }}&#44;&ensp;{{ rendezvous.year }}</p>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle">payment</i>
+            <span class="title"><b>Payment</b></span>
+            <p><b>Online:</b>&ensp;<a href="{{ rendezvous.payment-online }}">{{ rendezvous.payment-online }}</a></p>
+            <p><b>Mail-in:</b>&ensp;{{ rendezvous.payment-mail-in }}</p>
+          </li>
+        </ul>
+
+        <table class="striped responsive-table">
+          <thead>
+            <tr>
+              <th data-field="id"></th>
+              <th data-field="name">One-Day</th>
+              <th data-field="price">Two-Day</th>
+              <th data-field="price">Lunch-Only</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><i class="material-icons right">loyalty</i>Early Bird</td>
+              <td>{{ rendezvous.early-bird-one-day }}</td>
+              <td>{{ rendezvous.early-bird-two-day }}</td>
+              <td>{{ rendezvous.lunch-only }}</td>
+            </tr>
+            <tr>
+              <td>Member</td>
+              <td>{{ rendezvous.membership-one-day }}</td>
+              <td>{{ rendezvous.membership-two-day }}</td>
+              <td>{{ rendezvous.lunch-only }}</td>
+            </tr>
+            <tr>
+              <td>Non-Member</td>
+              <td>{{ rendezvous.non-member-one-day }}</td>
+              <td>{{ rendezvous.non-member-two-day }}</td>
+              <td>{{ rendezvous.lunch-only }}</td>
+            </tr>
+          </tbody>      
+        </table>
+
+        {% endif %}
+        {% endfor %}
+      </article>
+
+      <div class="divider"></div>
+
+      <article class="section flow-text" align="justify">
+        <div class="card-panel center-align">
+          <span>{{ content }}</span>
+        </div>
+      </article>
+    </section>
+    <!-- END board member -->
+
+    <aside class="col s12 m4">
+      <article class="section">
+
+        {% for rendezvous in site.data.Page_Data_-_Rendezvous %}
+        {% if rendezvous.year == page.year %}
+        {% if rendezvous.program-url != null %}
+        <a class="btn-large waves-effect waves-dark" style="width: 100%;" href="{{ rendezvous.program-url }}"><i class="material-icons right">picture_as_pdf</i>The&ensp;{{ rendezvous.year }}&ensp;Rendezvous Program</a>
+
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+
+        {% include list-forms.html %}
+        {% include list-rendezvous_proposals.html %}
+
+        {% include list-rendezvous_awards.html %}
+
+      </article>
+    </aside>
+  </div>
+
+  <!-- these variables need to be adjusted -->
+  {% for include in page.includes %}
+  {% if include == "presenters" %}
+  <div class="divider"></div>
+  <section class="section">
+    <div class="row">
+      
+      {% include list-rendezvous_presenters-card.html %}
+      {% include list-rendezvous_sessions-card.html %}
+      
+    </div>
+  </section>
+  {% endif %}
+  {% endfor %}
+  
+  {% for include in page.includes %}
+  {% if include == "vendors" %}
+  <div class="divider"></div>
+  <section class="section">
+    <div class="row">
+      
+      {% include list-rendezvous_vendors-avatar.html %}
+    
+    </div>
+  </section>
+  
+  {% endif %}
+  {% endfor %}  
+</main>
+<!-- END page_event -->

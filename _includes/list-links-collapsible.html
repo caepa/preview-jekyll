@@ -1,0 +1,47 @@
+{% for include in page.includes %}
+{% if include == "links" %}
+
+<ul class="collection with-header hoverable">
+  <li class="collection-header">
+    <h5>Link Categories</h5>
+  </li>
+<ul class="collapsible popout" data-collapsible="accordion">
+  {% assign grouped_tags = site.data.Page_Data_-_Link_Sharing | group_by: "Tag" %}
+  {% for tag in grouped_tags %}
+  <li>
+    <div class="collapsible-header"><i class="material-icons">expand_more</i>
+      <span class="title truncate">{{ tag.name }}</span>
+    </div>
+    <div class="collapsible-body collection">
+    {% for link in tag.items %}
+        <a class="collection-item title truncate waves-effect waves-teal modal-trigger" href="#{{ link.Name | remove: ' ' }}"><i class="right material-icons">flip_to_front</i>{{ link.Name }}</a>
+    {% endfor %}
+    </div>
+  </li>
+  {% endfor %}
+</ul>  
+</ul>
+
+<!-- list-links-sharing modal -->
+{% assign grouped_tags = site.data.Page_Data_-_Link_Sharing | group_by: "Tag" %}
+{% for tag in grouped_tags %}
+{% for link in tag.items %}
+<div id="{{ link.Name | remove: ' ' }}" class="row modal modal-fixed-footer">
+  <div class="modal-content">
+    <p class="title flow-text"><strong>{{ link.Name }}</strong><br />{{ link.Short-Name}}</p>
+    <p class="flow-text">{{ link.Description }}</p>
+    <div id="form-submission">
+      <p>Submitted by:&ensp;{{ link.Submitted-By }}<br />Submitted on:&ensp;{{ link.Time-Stamp }}</p>
+    </div>
+  </div>    
+  <div class="col s12 modal-footer">
+    <a class="modal-action modal-close waves-effect waves-red btn-flat" href="#!"><i class="material-icons right">close</i>Close</a>
+    <a class="btn modal-action waves-effect waves-dark tooltipped" data-position="left" data-tooltip="Visit {{ link.Website-URL }}" href="{{ link.Website-URL }}" target="_blank"><i class="material-icons right">launch</i>{{ link.Short-Name }}</a>
+  </div>
+</div>
+{% endfor %}
+{% endfor %}
+
+<!-- End link-collapsible modal includes -->
+{% endif %}
+{% endfor %}

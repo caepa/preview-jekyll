@@ -1,0 +1,43 @@
+{% for include in page.includes %}
+{% if include == "featured_links" %}
+
+{% if page.title == "Home" %}
+<section class="section">
+  <div class="row">
+    <h2 class="center">Featured Websites</h2>
+    
+{% else %}
+<div class="divider"></div>
+<section class="section">
+  <div class="row">
+    <h4 class="center-align">Featured Websites</h4>
+{% endif %}
+      
+      {% for link in site.data.Page_Data_-_Link_Sharing limit 3 %}
+      {% if link.Featured == "TRUE" %}
+      <article class='col s10 m4 offset-s1 center'>
+        <div class='card small hoverable waves-effect waves-dark'>
+          <a href="{{ link.Website-URL }}">
+            <div class="card-image valign-wrapper blue" style="height:66%">
+              <div class="card-gradient-bottom"></div>
+              <img src="http://s.wordpress.com/mshots/v1/{{ link.Website-URL }}" alt="{{ link.Website-URL }}" />
+              <i class="small material-icons white-text tooltipped" data-position="left" data-tooltip="Visit {{ link.Website-URL }}" style="position:absolute; right:0;">launch</i>
+              <span class="card-title truncate">{{ link.Short-Name }}</span>
+            </div>
+            <div class="card-content grey-text text-darken-4">
+              <p class="light" align="justify">
+                <strong>{{ link.Name }}</strong><br />
+                <span>{{ link.Description | truncate:100 "..."}}</span>
+              </p>
+            </div>
+          </a>
+        </div>
+      </article>
+      
+      {% endif %}
+      {% endfor %}
+  </div>
+</section>
+
+{% endif %}
+{% endfor %}

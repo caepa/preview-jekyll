@@ -1,0 +1,42 @@
+{% for include in page.includes %}
+{% if include == "vendors" %}
+
+<h4 class="center-align">Thanks to our&ensp;{{ page.year }}&ensp;vendors</h4>
+
+{% assign grouped = site.data.[page.rendezvous_file].Vendors | group_by: "category" | sort: "name" %}
+
+  {% for group in grouped %}
+  {% for item in group.items %}
+  <article class="col s6 m4 l3">
+    <ul class="collection">
+      <a class="collection-item avatar"href="{{ item.website }}">
+
+        {% if item.photo_path != null %}
+        <i class="small material-icons right white-text tooltipped" data-position="left" data-tooltip="Visit {{ item.website }}">launch</i>
+        
+        <img class="circle" src="{{ item.photo_path | prepend: site.vendor_path | prepend: site.baseurl }}" alt="{{ item.photo_path }}" />
+
+        {% else %}
+        <i class="container large material-icons grey-text text-lighten-2">person</i>
+
+        {% endif %}
+        <span class="title truncate"><b>{{ item.name }}</b></span>
+        {% if item.represenative != null %}
+        <p class="light truncate" align="justify">{{ item.represenative }}<br />
+          <span>{{ item.contact-email }}</span>
+        </p>
+        {% else %}
+        <p class="light truncate" align="justify">No Contact Information<br />
+          <span>Available</span>
+        </p>
+        {% endif %}
+      </a>
+    </ul>
+  </article>
+
+  {% endfor %}
+  {% endfor %}
+<!-- END list-rendezvous_vendors include -->
+
+{% endif %}
+{% endfor %}
