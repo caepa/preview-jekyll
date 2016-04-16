@@ -1,7 +1,6 @@
-# caepa.github.io
+# caepa.github.io/preview-jekyll
 
-This is the updated caepa.org site up for preview.
-I have made a short TODO list of things in progress...
+This is the updated caepa.org site. (preview here)[http://jekyll.caepa.org]
 
 #TODO
 
