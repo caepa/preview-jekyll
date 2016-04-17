@@ -1,6 +1,8 @@
 # caepa.github.io/preview-jekyll
 
-This is the updated caepa.org site. (preview here)[http://jekyll.caepa.org]
+This is the working update for caepa.org.
+
+[Preview at http://jekyll.caepa.org](http://jekyll.caepa.org)
 
 #TODO
 
